@@ -1,6 +1,7 @@
 //// Modules imports
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 //// Firebase Installation
 import { AngularFireModule } from '@angular/fire';
@@ -10,6 +11,12 @@ import { AngularFireDatabase } from "@angular/fire/database";
 //// Components Imports 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+
+//// Services imports 
+import { AuthService } from './services/auth.service';
+import { AuthGuard } from './guards/auth.guard';
 
 
 ///// Firebase Configuration
@@ -27,15 +34,21 @@ const firebaseConfig = {
 @NgModule({
   declarations: [
     AppComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     AngularFireAuth,
     AngularFireDatabase,
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
